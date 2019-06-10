@@ -18,6 +18,8 @@ if __name__ == '__main__':
 
     index = []
     for i in np.unique(iev):
+        if i%10 == 0:
+            print(i)
         image = reader[i]['photons'].values
         a = reader.read("pointing")
         alt = a['altitude_raw'][i]
@@ -26,6 +28,6 @@ if __name__ == '__main__':
         if muon_evt[0] or muon_evt[1] is not None:
             index.append(i)
 
-    print("Found "+str(len(index)+" muons")
+    print("Found "+str(len(index)+" muons"))
 
 
