@@ -12,4 +12,4 @@ if __name__ == '__main__':
     a = reader.read("pointing")
     alt = a['altitude_raw'][evnr]
     azi = a['azimuth_raw'][evnr]
-    muon_evt = analyze_muon_event(image,reader.mapping)
+    muon_evt = analyze_muon_event(image,reader.mapping,alt,azi)
