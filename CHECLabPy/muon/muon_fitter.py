@@ -1,8 +1,9 @@
 import numpy as np
 from astropy import units as u
-from astropy.coordinates import Angle 
+
 from CHECLabPy.utils.mapping import get_ctapipe_camera_geometry
-from ctapipe.coordinates import CameraFrame, NominalFrame, HorizonFrame
+from astropy.coordinates import Angle, SkyCoord, AltAz
+from ctapipe.coordinates import CameraFrame, NominalFrame
 from ctapipe.image.cleaning import tailcuts_clean
 from ctapipe.image.muon.muon_ring_finder import ChaudhuriKunduRingFitter
 from ctapipe.image.muon.features import npix_above_threshold
@@ -61,18 +62,33 @@ def analyze_muon_event(image,mapping,alt=0,azi=1.5):
     altval = alt * u.rad #event.mcheader.run_array_direction[1]
     #azi = event.mcheader.run_array_direction[0]
     azi = azi * u.rad
-    if Angle(altval) > Angle(90*u.deg):
-        altval = Angle(90*u.deg)
+    
+############
+    altval = alt *u.rad
+    if altval > Angle(90, unit=u.deg):
+        warnings.warn('Altitude over 90 degrees')
+        altval = Angle(90, unit=u.deg)
 
-    altaz = HorizonFrame(alt=altval,
-                         az=azi)
-    nom_coord = camera_coord.transform_to(
-        NominalFrame(array_direction=altaz, pointing_direction=altaz)
+    telescope_pointing = SkyCoord(
+        alt=altval,
+        az=azi,
+        frame=AltAz()
     )
-    x = nom_coord.x.to(u.deg)
-    y = nom_coord.y.to(u.deg)
+    camera_coord = SkyCoord(
+        x=x, y=y,
+        frame=CameraFrame(
+            focal_length=equivalent_focal_length,
+            rotation=geom.pix_rotation,
+            telescope_pointing=telescope_pointing,
+        )
+    )
 
-
+    nom_coord = camera_coord.transform_to(
+        NominalFrame(origin=telescope_pointing)
+    )
+    x = nom_coord.delta_az.to(u.deg)
+    y = nom_coord.delta_alt.to(u.deg)
+###############
     clean_mask = tailcuts_clean(geom, image, picture_thresh=tailcuts[0],
                                     boundary_thresh=tailcuts[1])
 
