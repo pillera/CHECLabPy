@@ -11,7 +11,7 @@ from ctapipe.image.muon.features import ring_containment
 from ctapipe.image.muon.features import ring_completeness
 from ctapipe.image.muon.muon_integrator import MuonLineIntegrate
 
-def analyze_muon_event(image,mapping,alt,azi):
+def analyze_muon_event(image,mapping,alt=0,azi=1.5):
     """
     Adapted for CHECLabPy from 
     ctapipe.image.muon.muon_reco_functions.analyse_muon_event
