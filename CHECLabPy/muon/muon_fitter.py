@@ -105,7 +105,7 @@ def analyze_muon_event(image,mapping,alt=0,azi=1.5):
     ring_dist = np.abs(dist - muonringparam.ring_radius)
 
     muonringparam = muonring.fit(
-            x, y, img * (ring_dist < muonringparam.ring_radius * 0.4)
+            x, y, image * (ring_dist < muonringparam.ring_radius * 0.4)
         )
 
     muonringparam.tel_id = {1}
