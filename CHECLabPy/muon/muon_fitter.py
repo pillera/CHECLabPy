@@ -66,7 +66,7 @@ def analyze_muon_event(image,mapping,alt=0,azi=1.5):
 ############
     altval = alt *u.rad
     if altval > Angle(90, unit=u.deg):
-        warnings.warn('Altitude over 90 degrees')
+        #warnings.warn('Altitude over 90 degrees')
         altval = Angle(90, unit=u.deg)
 
     telescope_pointing = SkyCoord(
