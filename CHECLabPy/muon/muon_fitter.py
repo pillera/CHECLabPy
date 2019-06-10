@@ -35,7 +35,7 @@ def analyze_muon_event(image,mapping,alt=0,azi=1.5):
     impact = (0.1, 0.95) * u.m
     ringwidth = (0.02, 0.2) * u.deg
     total_pix = 2048 
-    min_pix = 164 # 8% (or 6%) as limit
+    minpix = 164 # 8% (or 6%) as limit
     # Need to either convert from the pixel area in m^2 or check the camera specs
     ang_pixel_width = 0.163 * u.deg
     # Found from TDRs (or the pixel area)
