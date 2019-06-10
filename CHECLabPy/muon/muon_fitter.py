@@ -96,6 +96,7 @@ def analyze_muon_event(image,mapping,alt=0,azi=1.5):
         image = image * clean_mask
 
     if not sum(image):  # Nothing left after tail cuts
+        print("nothing left after tailcuts")
         return None
 
     muonring = ChaudhuriKunduRingFitter(None)
