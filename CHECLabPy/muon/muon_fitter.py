@@ -58,9 +58,9 @@ def analyze_muon_event(image,mapping,alt=0,azi=1.5):
         )
 
     # TODO: correct this hack for values over 90
-    altval = alt * u.deg #event.mcheader.run_array_direction[1]
+    altval = alt * u.rad #event.mcheader.run_array_direction[1]
     #azi = event.mcheader.run_array_direction[0]
-    azi = azi * u.deg
+    azi = azi * u.rad
     if Angle(altval) > Angle(90*u.deg):
         altval = Angle(90*u.deg)
 
