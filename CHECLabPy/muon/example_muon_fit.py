@@ -18,7 +18,7 @@ if __name__ == '__main__':
     # azi = a['azimuth_raw'][evnr]
     # muon_evt = analyze_muon_event(image,reader.mapping,alt,azi)
 
-    index = []
+    
     par = {'Index': [],
             'Size': [],
             'RingComp': []}
@@ -32,14 +32,17 @@ if __name__ == '__main__':
         azi = a['azimuth_raw'][i]
         muon_evt = analyze_muon_event(image,reader.mapping,alt,azi)
         if muon_evt[0] or muon_evt[1] is not None:
-            par['Index'].append(i)
-            par['Size'].append(np.sum(image))
+            
             if muon_evt[1]['RingComp'] is not None:
+                par['Index'].append(i)
+                par['Size'].append(np.sum(image))
                 par['RingComp'].append(muon_evt[1]['RingComp'].ring_completeness)
             else:
+                par['Index'].append(i)
+                par['Size'].append(np.sum(image))
                 par['RingComp'].append(-1)
 
-    tab = Table(index)
+    tab = Table(par)
     tab.write("/lustrehome/CTA_CHEC/mc/Muon_search_result.fits",format="fits")
     print("Found "+str(len(index))+" muons")
 
