@@ -38,7 +38,7 @@ if __name__ == '__main__':
             else:
                 par['RingComp'].append(-1)
 
-    tab = index.to_table()
+    tab = Table(index)
     tab.write("/lustrehome/CTA_CHEC/mc/Muon_search_result.fits",format="fits")
     print("Found "+str(len(index))+" muons")
 
