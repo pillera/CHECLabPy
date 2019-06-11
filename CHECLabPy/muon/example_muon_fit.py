@@ -22,7 +22,8 @@ if __name__ == '__main__':
     par = {'Index': [],
             'Size': [],
             'RingComp': []}
-    for i in np.unique(iev):
+    #for i in np.unique(iev):
+    for i in range(4):
         if i%10 == 0:
             print(i)
         image = reader[i]['photons'].values
