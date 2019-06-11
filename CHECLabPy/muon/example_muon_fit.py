@@ -44,6 +44,7 @@ if __name__ == '__main__':
                 par['RingComp'].append(-1)
 
     tab = Table(par)
+    fname = "/lustrehome/pillera/CTA_CHEC/mc/Muon_search_result.fits"
     if os.path.exists(fname):
         os.remove(fname)
     tab.write("/lustrehome/pillera/CTA_CHEC/mc/Muon_search_result.fits",format="fits")
