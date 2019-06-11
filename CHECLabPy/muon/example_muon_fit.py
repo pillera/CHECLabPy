@@ -1,4 +1,5 @@
 #!/bin/env python
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from CHECLabPy.core.io import DL1Reader
@@ -43,6 +44,8 @@ if __name__ == '__main__':
                 par['RingComp'].append(-1)
 
     tab = Table(par)
+    if os.path.exists(fname):
+        os.remove(fname)
     tab.write("/lustrehome/pillera/CTA_CHEC/mc/Muon_search_result.fits",format="fits")
     
 
