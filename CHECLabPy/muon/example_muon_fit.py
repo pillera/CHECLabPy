@@ -40,6 +40,6 @@ if __name__ == '__main__':
 
     tab = index.to_table()
     tab.write("/lustrehome/CTA_CHEC/mc/Muon_search_result.fits",format="fits")
-    print("Found "+str(len(index)+" muons"))
+    print("Found "+str(len(index))+" muons")
 
 
